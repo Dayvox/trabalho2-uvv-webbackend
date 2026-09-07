@@ -1,0 +1,23 @@
+@{
+    ViewData["Title"] = "Início";
+    var logado = User.Identity is not null && User.Identity.IsAuthenticated;
+}
+
+<div class="text-center py-5">
+    <h1 class="display-5">Gestão de Consultas UVV</h1>
+    <p class="lead text-muted">
+        Cadastre-se, faça login e gerencie suas consultas médicas ou profissionais.
+    </p>
+
+    @if (logado)
+    {
+        <a asp-controller="Consultas" asp-action="Index" class="btn btn-primary btn-lg mt-3">Ver minhas consultas</a>
+    }
+    else
+    {
+        <div class="mt-3">
+            <a asp-controller="Conta" asp-action="Registrar" class="btn btn-primary btn-lg">Criar conta</a>
+            <a asp-controller="Conta" asp-action="Login" class="btn btn-outline-secondary btn-lg">Entrar</a>
+        </div>
+    }
+</div>

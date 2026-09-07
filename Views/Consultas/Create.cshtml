@@ -1,0 +1,39 @@
+@model GestaoConsultasUVV.Models.Consulta
+@{
+    ViewData["Title"] = "Nova consulta";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h1 class="h3 mb-4">Nova consulta</h1>
+
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Especialidade" class="form-label"></label>
+                <input asp-for="Especialidade" class="form-control" placeholder="Ex.: Cardiologia" />
+                <span asp-validation-for="Especialidade" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DataHora" class="form-label"></label>
+                <input asp-for="DataHora" type="datetime-local" asp-format="{0:yyyy-MM-ddTHH:mm}" class="form-control" />
+                <span asp-validation-for="DataHora" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Descricao" class="form-label"></label>
+                <textarea asp-for="Descricao" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

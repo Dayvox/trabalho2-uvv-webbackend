@@ -1,0 +1,47 @@
+@model IEnumerable<GestaoConsultasUVV.Models.Consulta>
+@{
+    ViewData["Title"] = "Minhas consultas";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">Minhas consultas</h1>
+    <a asp-action="Create" class="btn btn-primary">Nova consulta</a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        Você ainda não possui consultas agendadas.
+        <a asp-action="Create" class="alert-link">Cadastrar a primeira</a>.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.Especialidade)</th>
+                    <th>@Html.DisplayNameFor(m => m.DataHora)</th>
+                    <th>@Html.DisplayNameFor(m => m.Descricao)</th>
+                    <th class="text-end">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Especialidade</td>
+                        <td>@item.DataHora.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@(string.IsNullOrWhiteSpace(item.Descricao) ? "-" : item.Descricao)</td>
+                        <td class="text-end">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Detalhes</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Editar</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
